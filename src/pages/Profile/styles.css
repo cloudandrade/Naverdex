@@ -1,8 +1,9 @@
+/* css com sections compartilhadas*/
 .profile-container {
 	width: 100%;
 	padding: 24px 32px;
 }
-
+/*Header-Nav*/
 .profile-container header {
 	display: flex;
 	align-items: center;
@@ -22,6 +23,7 @@
 	border-color: rgb(153, 153, 153);
 }
 
+/*List Section*/
 .navers-panel {
 	margin-top: 10px;
 	width: 100%;
@@ -103,4 +105,56 @@
 	color: #737380;
 	line-height: 21px;
 	font-size: 16px;
+}
+
+/*Add section*/
+.add-container {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.add-box {
+	margin-top: 50px;
+	width: 600px;
+	height: 400px;
+	background-color: white;
+	box-sizing: border-box;
+	padding: 20px;
+}
+
+.add-title {
+	font-family: Montserrat !important;
+	font-style: normal !important;
+	font-weight: 600 !important;
+	font-size: 24px !important;
+	line-height: 36px !important;
+	color: #212121;
+}
+
+.add-back-icon {
+	margin-top: 5px;
+	margin-right: 8px;
+	width: 24px;
+	height: 24px;
+	color: black !important;
+}
+
+.add-line1 {
+	width: 280px;
+	margin-top: 10px;
+	padding: 10px;
+}
+
+.add-campos2 {
+	width: 280px;
+	margin-top: 10px;
+}
+
+.add-button {
+	margin-top: 20px !important;
+	margin-right: 8px !important;
+	width: 176px !important;
+	height: 40px;
 }
