@@ -1,0 +1,77 @@
+.container-login {
+	width: 100%;
+	max-width: 1120px;
+	height: 100vh;
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.login-box {
+	position: absolute;
+	width: 448px;
+	height: 408px;
+	background-color: white;
+	border: 1px solid #212121;
+	box-sizing: border-box;
+	padding: 96px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.nave-icon {
+	position: absolute;
+	top: 37px;
+}
+
+.email-area {
+	top: 126px;
+	margin-top: 10px;
+	position: absolute;
+	width: 384px;
+	height: 62px;
+}
+
+.senha-area {
+	top: 216px;
+	margin-top: 10px;
+	position: absolute;
+	width: 384px;
+	height: 62px;
+}
+
+.botao-area {
+	top: 300px;
+	position: absolute;
+	margin-top: 15px;
+	width: 384px;
+}
+
+/* modificacoes diretas de elemento */
+.MuiButtonBase-root {
+	background: #212121 !important;
+	color: white !important;
+	font-size: 12px !important;
+	border-radius: 0px !important;
+}
+
+.MuiOutlinedInput-root {
+	position: relative;
+	border-radius: 0px !important;
+}
+
+.MuiOutlinedInput-input {
+	padding: 16px 10px !important;
+}
+
+.MuiOutlinedInput-notchedOutline {
+	border-color: rgb(0, 0, 0) !important;
+}
+
+.MuiButton-fullWidth {
+	height: 40px;
+}
