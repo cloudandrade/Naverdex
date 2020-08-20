@@ -1,17 +1,18 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import ImgMock from '../../assets/juliano_mock.png';
+import './style.css';
+import { Create as EditIcon, Delete as DeleteIcon } from '@material-ui/icons';
+import { Link, useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
 	root: {
-		width: 281,
-		height: 400,
+		width: '281px',
+		height: '376px',
+		borderRadius: 0,
 	},
 });
 
@@ -20,25 +21,23 @@ export default function NaverCard() {
 
 	return (
 		<Card className={classes.root}>
-			<Typography gutterBottom variant="h5" component="h2">
-				Imagem
-			</Typography>
-			<Typography gutterBottom variant="h5" component="h2">
-				Nome
-			</Typography>
-			<Typography
-				variant="body2"
-				color="textSecondary"
-				component="p"
-			>
-				Função
-			</Typography>
-			<Button size="small" color="primary">
-				Deletar
-			</Button>
-			<Button size="small" color="primary">
-				Editar
-			</Button>
+			<div className="card-container">
+				<div className="card-image-content">
+					<img src={ImgMock} alt="Nave" className="card-image" />
+				</div>
+				<div className="info-area">
+					<Typography className="nome-area">Juliano Reis</Typography>
+					<Typography className="prof-area">Front-end Developer</Typography>
+				</div>
+				<div className="buttons-area">
+					<Link size="small">
+						<DeleteIcon className="icons" />
+					</Link>
+					<Link>
+						<EditIcon className="icons" />
+					</Link>
+				</div>
+			</div>
 		</Card>
 	);
 }
