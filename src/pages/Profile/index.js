@@ -94,18 +94,28 @@ export default function Profile() {
 	}
 
 	//--------------------------------------------Ações ao deletar
+	//chamando o modal
 	function handleDeleteModal() {
 		setTitle('Excluir Naver');
 		setDescription('Tem certeza que deseja excluir este Naver?');
 		setOpenConfirmation(true);
 	}
-
+	//lidando com exclusão
 	function handleConfirmation() {
 		setOpenConfirmation(false);
 	}
 	//-----------------------------------------------Ações ao editar
+	//chamando o modal
 	function handleEditModal() {
 		handleChangeSection('editar');
+	}
+
+	//lidando com o salvamento do naver editado
+	function handleSalvarNaverEditado() {
+		setTitle('Naver Criado');
+		setDescription('Naver criado com sucesso!');
+		setOpenFeedback(true);
+		handleChangeSection('exibir');
 	}
 
 	//---------------------------------------------Ações ao Exibir Um
@@ -124,6 +134,7 @@ export default function Profile() {
 				</header>
 			</div>
 			{pageMode === 'exibir' ? (
+				//-----------------------------------------------------SECTION LISTAR/EXIBIR
 				<div>
 					<div className="navers-panel">
 						<div className="navers-panel-row">
@@ -202,6 +213,7 @@ export default function Profile() {
 					</div>
 				</div>
 			) : pageMode === 'adicionar' ? (
+				//-------------------------------------------------------SECTION ADICIONAR
 				<div className="add-container">
 					<div className="add-box">
 						<Grid container>
@@ -288,6 +300,7 @@ export default function Profile() {
 					</div>
 				</div>
 			) : (
+				//-----------------------------------------------------------SECTION EDITAR
 				<div className="add-container">
 					<div className="add-box">
 						<Grid container>
