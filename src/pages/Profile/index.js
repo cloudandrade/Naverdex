@@ -11,6 +11,8 @@ import { Typography } from '@material-ui/core';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import ConfirmationModal from '../../components/ConfirmacaoModal/index';
+import FeedbackModal from '../../components/FeedbackModal/index';
+import ProfileModal from '../../components/ProfileModal/index';
 
 const CssTextField = withStyles({
 	root: {
@@ -40,16 +42,11 @@ export default function Profile() {
 	const [navers, setNavers] = useState([]);
 	const [pageMode, setPageMode] = useState('exibir');
 	const history = useHistory();
-
-	const [open, setOpen] = useState(false);
-
-	function closeModal() {
-		setOpen(false);
-	}
-
-	function handleConfirmation() {
-		setOpen(false);
-	}
+	const [title, setTitle] = useState('');
+	const [description, setDescription] = useState('');
+	const [openConfirmation, setOpenConfirmation] = useState(false);
+	const [openFeedback, setOpenFeedback] = useState(false);
+	const [openProfile, setOpenProfile] = useState(false);
 
 	useEffect(() => {
 		getListaNavers()
@@ -61,15 +58,13 @@ export default function Profile() {
 			});
 	}, []);
 
+	//----------------------------------------Metodo deslogar
 	async function handleLogout() {
 		localStorage.clear();
 		history.push('/');
 	}
 
-	function handleSalvarNaver() {
-		handleChangeSection('exibir');
-	}
-
+	//------------------------------------------Método mudar seção
 	function handleChangeSection(pageStatus) {
 		if (pageStatus === 'adicionar') {
 			setPageMode('adicionar');
@@ -79,17 +74,43 @@ export default function Profile() {
 			setPageMode('exibir');
 		}
 	}
-
-	function handleDeleteModal() {
-		setOpen(true);
+	//------------------------------------------Método fechar modais
+	function closeModal(nomeModal) {
+		if (nomeModal === 'modalConfirmation') {
+			setOpenConfirmation(false);
+		} else if (nomeModal === 'modalFeedback') {
+			setOpenFeedback(false);
+		} else {
+			setOpenProfile(false);
+		}
 	}
 
+	//-------------------------------------------Ações ao salvar
+	function handleSalvarNaver() {
+		setTitle('Naver Criado');
+		setDescription('Naver criado com sucesso!');
+		setOpenFeedback(true);
+		handleChangeSection('exibir');
+	}
+
+	//--------------------------------------------Ações ao deletar
+	function handleDeleteModal() {
+		setTitle('Excluir Naver');
+		setDescription('Tem certeza que deseja excluir este Naver?');
+		setOpenConfirmation(true);
+	}
+
+	function handleConfirmation() {
+		setOpenConfirmation(false);
+	}
+	//-----------------------------------------------Ações ao editar
 	function handleEditModal() {
 		handleChangeSection('editar');
 	}
 
+	//---------------------------------------------Ações ao Exibir Um
 	function handleImageClick() {
-		console.log('clickou');
+		setOpenProfile(true);
 	}
 
 	return (
@@ -354,11 +375,22 @@ export default function Profile() {
 				</div>
 			)}
 			<ConfirmationModal
-				open={open}
-				handleClose={closeModal}
-				title={'Confirmação'}
-				description={'Deseja Realmente entrar neste site?'}
+				open={openConfirmation}
+				handleClose={() => closeModal('modalConfirmation')}
+				title={title}
+				description={description}
 				handleYes={handleConfirmation}
+			/>
+
+			<FeedbackModal
+				open={openFeedback}
+				handleClose={() => closeModal('modalFeedback')}
+				title={title}
+				description={description}
+			/>
+			<ProfileModal
+				open={openProfile}
+				handleClose={() => closeModal('modalProfile')}
 			/>
 		</div>
 	);
