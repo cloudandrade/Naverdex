@@ -4,14 +4,8 @@ import { FiLogIn } from 'react-icons/fi';
 import api from '../../services/api';
 import { Link, useHistory } from 'react-router-dom';
 import './styles.css';
-import { Grid, TextField } from '@material-ui/core';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import FilledInput from '@material-ui/core/FilledInput';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
 import NaveTitleIcon from '../../assets/nave-title-logo.png';
 import { Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
@@ -41,7 +35,6 @@ const CssTextField = withStyles({
 
 export default function Login() {
 	const history = useHistory();
-
 	function handleLogin() {
 		history.push('/profile');
 	}
@@ -51,17 +44,10 @@ export default function Login() {
 			<div className="container-login">
 				<div className="login-box">
 					<div className="nave-icon">
-						<img
-							src={NaveTitleIcon}
-							alt="Nave"
-							width="235"
-							height="60"
-						/>
+						<img src={NaveTitleIcon} alt="Nave" width="235" height="60" />
 					</div>
 					<div className="email-area">
-						<Typography variant="subtitle2">
-							E-mail
-						</Typography>
+						<Typography variant="subtitle2">E-mail</Typography>
 						<CssTextField
 							variant="outlined"
 							fullWidth={true}
@@ -69,9 +55,7 @@ export default function Login() {
 						/>
 					</div>
 					<div className="senha-area">
-						<Typography variant="subtitle2">
-							Senha
-						</Typography>
+						<Typography variant="subtitle2">Senha</Typography>
 						<CssTextField
 							variant="outlined"
 							fullWidth={true}

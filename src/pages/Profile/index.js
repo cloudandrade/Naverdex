@@ -10,6 +10,7 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { Typography } from '@material-ui/core';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
+import ConfirmationModal from '../../components/ConfirmacaoModal/index';
 
 const CssTextField = withStyles({
 	root: {
@@ -40,6 +41,16 @@ export default function Profile() {
 	const [pageMode, setPageMode] = useState('exibir');
 	const history = useHistory();
 
+	const [open, setOpen] = useState(false);
+
+	function closeModal() {
+		setOpen(false);
+	}
+
+	function handleConfirmation() {
+		setOpen(false);
+	}
+
 	useEffect(() => {
 		getListaNavers()
 			.then((response) => {
@@ -56,15 +67,29 @@ export default function Profile() {
 	}
 
 	function handleSalvarNaver() {
-		handleChangeSection();
+		handleChangeSection('exibir');
 	}
 
-	function handleChangeSection() {
-		if (pageMode === 'exibir') {
+	function handleChangeSection(pageStatus) {
+		if (pageStatus === 'adicionar') {
 			setPageMode('adicionar');
+		} else if (pageStatus === 'editar') {
+			setPageMode('editar');
 		} else {
 			setPageMode('exibir');
 		}
+	}
+
+	function handleDeleteModal() {
+		setOpen(true);
+	}
+
+	function handleEditModal() {
+		handleChangeSection('editar');
+	}
+
+	function handleImageClick() {
+		console.log('clickou');
 	}
 
 	return (
@@ -86,7 +111,7 @@ export default function Profile() {
 								<Button
 									variant="contained"
 									fullWidth={true}
-									onClick={() => handleChangeSection()}
+									onClick={() => handleChangeSection('adicionar')}
 								>
 									Adicionar Naver
 								</Button>
@@ -96,16 +121,40 @@ export default function Profile() {
 					<div className="navers-container">
 						<Grid container justify="center" spacing={5}>
 							<Grid item md={3}>
-								<NaverCard />
+								<NaverCard
+									nome={'Juliano Borba'}
+									profissao={'Front-end Pleno'}
+									handleDelete={handleDeleteModal}
+									handleEdit={handleEditModal}
+									handleImageClick={handleImageClick}
+								/>
 							</Grid>
 							<Grid item md={3}>
-								<NaverCard />
+								<NaverCard
+									nome={'Jan Cloude Andrade'}
+									profissao={'FullStack Pleno'}
+									handleDelete={handleDeleteModal}
+									handleEdit={handleEditModal}
+									handleImageClick={handleImageClick}
+								/>
 							</Grid>
 							<Grid item md={3}>
-								<NaverCard />
+								<NaverCard
+									nome={'Kaire Santos'}
+									profissao={'Web Designer'}
+									handleDelete={handleDeleteModal}
+									handleEdit={handleEditModal}
+									handleImageClick={handleImageClick}
+								/>
 							</Grid>
 							<Grid item md={3}>
-								<NaverCard />
+								<NaverCard
+									nome={'Jorge Aragão'}
+									profissao={'Analista de Testes'}
+									handleDelete={handleDeleteModal}
+									handleEdit={handleEditModal}
+									handleImageClick={handleImageClick}
+								/>
 							</Grid>
 						</Grid>
 
@@ -131,12 +180,12 @@ export default function Profile() {
 				</ul> */}
 					</div>
 				</div>
-			) : (
+			) : pageMode === 'adicionar' ? (
 				<div className="add-container">
 					<div className="add-box">
 						<Grid container>
 							<Grid item>
-								<Link onClick={() => handleChangeSection()}>
+								<Link onClick={() => handleChangeSection('exibir')}>
 									<ArrowBackIosIcon className="add-back-icon" />
 								</Link>
 							</Grid>
@@ -217,7 +266,100 @@ export default function Profile() {
 						</Grid>
 					</div>
 				</div>
+			) : (
+				<div className="add-container">
+					<div className="add-box">
+						<Grid container>
+							<Grid item>
+								<Link onClick={() => handleChangeSection('exibir')}>
+									<ArrowBackIosIcon className="add-back-icon" />
+								</Link>
+							</Grid>
+							<Grid item>
+								<Typography className="add-title">
+									Editar Naver
+								</Typography>
+							</Grid>
+						</Grid>
+						{/* primeira linha do adicionar naver */}
+						<Grid container>
+							<Grid item>
+								<div className="add-line1">
+									<Typography variant="subtitle2">Nome</Typography>
+									<CssTextField fullWidth={true} placeholder="Nome" />
+								</div>
+							</Grid>
+							<Grid item>
+								<div className="add-line1">
+									<Typography variant="subtitle2">Cargo</Typography>
+									<CssTextField fullWidth={true} placeholder="Cargo" />
+								</div>
+							</Grid>
+						</Grid>
+						{/* segunda linha do adicionar naver */}
+						<Grid container>
+							<Grid item>
+								<div className="add-line1">
+									<Typography variant="subtitle2">Idade</Typography>
+									<CssTextField fullWidth={true} placeholder="Idade" />
+								</div>
+							</Grid>
+							<Grid item>
+								<div className="add-line1">
+									<Typography variant="subtitle2">
+										Tempo de empresa
+									</Typography>
+									<CssTextField
+										fullWidth={true}
+										placeholder="Tempo de empresa"
+									/>
+								</div>
+							</Grid>
+						</Grid>
+						{/* terceira linha do adicionar naver */}
+						<Grid container>
+							<Grid item>
+								<div className="add-line1">
+									<Typography variant="subtitle2">
+										Projetos que participou
+									</Typography>
+									<CssTextField
+										fullWidth={true}
+										placeholder="Projetos que participou"
+									/>
+								</div>
+							</Grid>
+							<Grid item>
+								<div className="add-line1">
+									<Typography variant="subtitle2">
+										URL da foto do Naver
+									</Typography>
+									<CssTextField fullWidth={true} placeholder="Cargo" />
+								</div>
+							</Grid>
+						</Grid>
+						<Grid container justify="flex-end">
+							<Grid item>
+								<Button
+									className="add-button"
+									variant="contained"
+									fullWidth={true}
+									onClick={() => handleSalvarNaver()}
+								>
+									Salvar
+								</Button>
+							</Grid>
+						</Grid>
+					</div>
+				</div>
 			)}
+			<ConfirmationModal
+				open={open}
+				handleClose={closeModal}
+				title={'Confirmação'}
+				description={'Deseja Realmente entrar neste site?'}
+				handleYes={handleConfirmation}
+			/>
 		</div>
 	);
 }
